@@ -8,9 +8,10 @@ from datetime import timedelta
 import json
 
 #####################################################################################################
-courses               = ['5396','5487','5250', '5251']   # From Canvas
-first_week           = 1        # from this week
-last_week            = 17        # until this week
+#courses               = ['5396','5487','5250', '5251']   # From Canvas
+courses               = ['5335','5338','5569']   # From Canvas
+first_week           = 3        # from this week
+last_week            = 4        # until this week
 
 def get_course_name(course_details):
     big_name = course_details['name']
@@ -97,6 +98,7 @@ def check_videoconferencia(week, course, module, item, name):
     return row
 
 def check(course):
+    print("Reviewing...", course)
     week = 0
     course_details = canvas.get_course(course)
     #print(course_details)
@@ -108,6 +110,7 @@ def check(course):
             #print(module)
             week += 1
             if week >= first_week and week <= last_week :
+                print("Scanning week",week)
                 items = canvas.get_items(course, module['id'])
                 for item in items:
                     if item['type'] == 'ExternalUrl':

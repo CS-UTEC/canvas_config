@@ -5,7 +5,7 @@ url_modules = '<path>/<course>/modules?per_page=40'
 url_items   = '<path>/<course>/modules/<module>/items?per_page=40'
 url_item    = "<path>/<course>/modules/<module>/items/<item>"
 path        = 'https://utec.instructure.com/api/v1/courses'
-access_token         = "4689~soKr8TT5Z2qxojaLHeTrXzcLsLM9mL31S38aStKn2tIYDBhC8Ri"
+access_token         = ""
 
 def headers():
     token = 'Bearer '+access_token
@@ -33,6 +33,8 @@ def put(url, data):
         r.raise_for_status()
     except Exception as e:
         print(e)
+    #if r.status_code >= 400:
+    #    raise Exception("Unauthorized, Verify course and access_token")
     return r.json()
 
 def get_course(course):
