@@ -9,9 +9,9 @@ import json
 
 #####################################################################################################
 #courses               = ['5396','5487','5250', '5251']   # From Canvas
-courses               = ['5335','5338','5569']   # From Canvas
-first_week           = 3        # from this week
-last_week            = 4        # until this week
+#courses               = ['5335','5338','5569']   # From Canvas
+first_week           = int(input("Week from: "))        # from this week
+last_week            = int(input("Week to  : "))        # until this week
 
 def get_course_name(course_details):
     big_name = course_details['name']
@@ -123,9 +123,12 @@ def check(course):
     return df
 
 result = pd.DataFrame(columns=['Course','Week', 'Type', 'isTitleOK','isURLOK','isPublished', 'Title', 'URL'])
-for course in courses:
-    df_course = check(course)
-    result = result.append(df_course, ignore_index=True)
 
-print(result)
+filepath = 'courses.txt'
+with open(filepath) as f:
+    lines = [line.rstrip() for line in f]
+    for course in lines:
+        df_course = check(course)
+        result = result.append(df_course, ignore_index=True)
+
 result.to_csv(r'result.csv', index = False)
